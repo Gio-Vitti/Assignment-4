@@ -3,8 +3,10 @@ class Player {
   //Boolean states for moving left, right, jumping, and touching the ground
   boolean moveRight;
   boolean moveLeft;
-  boolean touchGround;
   boolean jumping;
+  
+  boolean touchGround;
+  boolean touchWallRight;
 
   //Movement Pararmeters
   float jumpHeight = 6;
@@ -41,6 +43,14 @@ class Player {
     fill(255);
     rect(pos.x, pos.y, sizeX, sizeY);
     
+    fill(255,0,0);
+    ellipse(pos.x, player.pos.y + player.sizeY/2, 10,10);
+    
+    if (touchWallRight == true) {
+       ellipse(pos.x, player.pos.y + player.sizeY/2, 20,20);
+    }
+    
+    println(touchWallRight);
   }
 
   //Physics and Movement

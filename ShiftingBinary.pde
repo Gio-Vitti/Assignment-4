@@ -19,9 +19,9 @@ void setup() {
   //Initialize Ground objects, each on their respective locations
   //SCREEN 1
   ground[0] = new Ground(320,450,400,50);
-  ground[1] = new Ground(700,375,200,50);
-  ground[2] = new Ground(320,375,70,70);
-  ground[3] = new Ground(0,0,0,0);
+  ground[1] = new Ground(0,480,0,0);
+  ground[2] = new Ground(320,380,70,100);
+  ground[3] = new Ground(0,480,0,0);
 
   //SCREEN 2
 
@@ -37,7 +37,6 @@ void draw() {
   player.physics();
   player.display();
   
-
   for (int i = 0; i < 4; i++) {
       ground[i].display();
       ground[i].playerInteractions();
