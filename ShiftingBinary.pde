@@ -1,15 +1,29 @@
 //Declare objects
 Player player;
-Ground ground;
+
+//Ground Array
+Ground [] ground = new Ground[4];
 
 //Setup
 void setup() {
-  size(640,480);
+  size(640, 480);
   rectMode(CENTER);
+  frameRate(240);
 
+  //Initialize player and reset position
   player = new Player(X, Y);
-  ground = new Ground(width/2, height-100, 200, 50);
   player.reset();
+
+  //Initialize Ground objects, each on their respective locations
+  //SCREEN 1
+  ground[0] = new Ground(width/4, height-25, 350, 50);
+  ground[1] = new Ground(width/2 + 200, height-120, 200, 25);
+  ground[2] = new Ground(width/3, height-200, 200, 25);
+  ground[3] = new Ground(width/3, height-75, 50, 50);
+
+  //SCREEN 2
+
+  //SCREEN 3
 }
 
 void draw() {
@@ -17,7 +31,12 @@ void draw() {
 
   player.physics();
   player.display();
-  ground.display();
+
+  for (int i = 0; i < 4; i++) {
+      ground[i].display();
+      ground[i].playerInteractions();
+    }
+
 
   //Resets when falling off the stage
   if (player.pos.y > height) {
@@ -25,7 +44,7 @@ void draw() {
 
     //Scroll
     pushMatrix();
-    translate(player.pos.x,player.pos.y);
+    translate(player.pos.x, player.pos.y);
   }
 }
 
@@ -39,13 +58,11 @@ void keyPressed() {
   if (key == 'a') {
     player.moveLeft = true;
   }
-  //Jump
-  if (key == 'w' && player.touchGround == true) {
-    player.vel.y = player.vel.y - 6;
+  
+  if(key=='w') {
     player.jumping = true;
-  } else {
-    player.jumping = false;
   }
+ 
 }
 
 //Check if key has been released
@@ -57,5 +74,9 @@ void keyReleased() {
   if (key == 'a') {
     player.moveLeft = false;
     player.vel.x = 0;
+  }
+  
+   if(key=='w') {
+    player.jumping = false;
   }
 }
