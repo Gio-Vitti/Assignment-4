@@ -13,7 +13,7 @@ class Player {
 
   //Size
   float sizeX = 30;
-  float sizeY = 30;
+  float sizeY = 50;
   
 
   //Vectors:
@@ -40,11 +40,10 @@ class Player {
 
   //Draw Player
   void display() {
-    fill(255);
-    rect(pos.x, pos.y, sizeX, sizeY);
-    
-    fill(255,0,0);
-    ellipse(pos.x, player.pos.y + player.sizeY/2 - 5, 10,10);
+    noFill();
+    stroke(#ff56b9);
+    strokeWeight(3);
+    rect(pos.x, pos.y - 2, sizeX, sizeY);
   }
 
   //Physics and Movement

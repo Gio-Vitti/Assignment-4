@@ -33,7 +33,7 @@ void draw() {
  
  //Screen scroll
     translate(width/2 - player.pos.x, 0);
-
+    
   player.physics();
   player.display();
   
