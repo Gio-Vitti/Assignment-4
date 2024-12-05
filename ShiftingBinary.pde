@@ -8,7 +8,6 @@ Ground [] ground = new Ground[4];
 void setup() {
   size(640, 480);
   rectMode(CENTER);
-  frameRate(240);
 
   //Initialize player and reset position
   player = new Player(X, Y);
