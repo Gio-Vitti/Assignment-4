@@ -6,7 +6,6 @@ class Player {
   boolean jumping;
   
   boolean touchGround;
-  boolean touchWallRight;
 
   //Movement Pararmeters
   float jumpHeight = 6;
@@ -15,6 +14,7 @@ class Player {
   //Size
   float sizeX = 30;
   float sizeY = 30;
+  
 
   //Vectors:
   //Position
@@ -44,13 +44,7 @@ class Player {
     rect(pos.x, pos.y, sizeX, sizeY);
     
     fill(255,0,0);
-    ellipse(pos.x, player.pos.y + player.sizeY/2, 10,10);
-    
-    if (touchWallRight == true) {
-       ellipse(pos.x, player.pos.y + player.sizeY/2, 20,20);
-    }
-    
-    println(touchWallRight);
+    ellipse(pos.x, player.pos.y + player.sizeY/2 - 5, 10,10);
   }
 
   //Physics and Movement

@@ -21,21 +21,14 @@ class Ground {
     stroke(255);
     noFill();
     rect(posX, posY, sizeX, sizeY);
-    
-    stroke(255,0,0);
-    rect(posX, posY - sizeY/2, 1000,1);
   }
 
 
   void playerInteractions() {
     
-    //Player's HORIZONTAL collision with ground
-      if (player.pos.y + player.sizeY/2 > posY - sizeY/2 +10) {
-        player.touchWallRight = true;
-      }  else { player.touchWallRight = false; }
 
     //Player's VERTICAL collision with ground
-    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.y + player.sizeY/2 < posY-sizeY/3 && player.pos.x - player.sizeX/2 <= posX + sizeX/2 && player.pos.x + player.sizeX/2 >= posX - sizeX/2) {
+    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.y + player.sizeY/2 < posY-sizeY/3 && player.pos.x - player.sizeX/2 +5 <= posX + sizeX/2 && player.pos.x + player.sizeX/2 -5 >= posX - sizeX/2) {
       player.acc.y = 0;
       player.vel.y = 0;
       player.touchGround = true;
@@ -43,6 +36,17 @@ class Ground {
       player.acc.y = 0.2;
       player.touchGround = false;
     }
+    
+     //Player's HORIZONTAL collision with ground
+     //Right edge collision
+      if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.x + player.sizeX/2 <= posX - sizeX/2 + 10 && player.pos.x + player.sizeX/2 >= posX - sizeX/2 && player.moveRight == true) {
+        player.vel.x = 0;
+      }  
+      
+       //Left edge collision
+      if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.x - player.sizeX/2 >= posX + sizeX/2 - 10 && player.pos.x - player.sizeX/2 <= posX + sizeX/2 && player.moveLeft == true) {
+        player.vel.x = 0;
+      }  
 
     //Ensures that the player doesn't clip into the ground
     if (player.touchGround == true && player.jumping == false) {
