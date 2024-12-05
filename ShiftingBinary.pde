@@ -1,3 +1,6 @@
+//Variables
+
+
 //Declare objects
 Player player;
 
@@ -15,10 +18,10 @@ void setup() {
 
   //Initialize Ground objects, each on their respective locations
   //SCREEN 1
-  ground[0] = new Ground(width/4, height-25, 350, 50);
-  ground[1] = new Ground(width/2 + 200, height-120, 200, 25);
-  ground[2] = new Ground(width/3, height-200, 200, 25);
-  ground[3] = new Ground(width/3, height-75, 50, 50);
+  ground[0] = new Ground(320,450,400,50);
+  ground[1] = new Ground(700,375,200,50);
+  ground[2] = new Ground(0,0,0,0);
+  ground[3] = new Ground(0,0,0,0);
 
   //SCREEN 2
 
@@ -27,9 +30,13 @@ void setup() {
 
 void draw() {
   background(#0d1030);
+ 
+ //Screen scroll
+    translate(width/2 - player.pos.x, 0);
 
   player.physics();
   player.display();
+  
 
   for (int i = 0; i < 4; i++) {
       ground[i].display();
@@ -38,12 +45,9 @@ void draw() {
 
 
   //Resets when falling off the stage
-  if (player.pos.y > height) {
+  if (player.pos.y - player.sizeY - 50 > height) {
     player.reset();
 
-    //Scroll
-    pushMatrix();
-    translate(player.pos.x, player.pos.y);
   }
 }
 

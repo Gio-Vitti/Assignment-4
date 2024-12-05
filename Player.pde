@@ -30,7 +30,7 @@ class Player {
 
   //Reset Position and Physics
   void reset() {
-    pos.x = width/4;
+    pos.x = width/2;
     pos.y = height/2;
     acc.y = 0;
     vel.y = 0;
@@ -40,8 +40,7 @@ class Player {
   void display() {
     fill(255);
     rect(pos.x, pos.y, sizeX, sizeY);
-
-    rect(width/2, ground[0].posY-ground[0].sizeY/3, width, 2);
+    
   }
 
   //Physics and Movement
