@@ -45,12 +45,15 @@ class Player {
 
   //Physics and Movement
   void physics() {
+    
     //Movement in the X Axis
     pos.x = pos.x + vel.x;
+    
     //Move Right
     if (moveRight == true) {
       vel.x = speed;
     }
+    
     //Move Left
     if (moveLeft == true) {
       vel.x = -speed;
