@@ -18,9 +18,9 @@ void setup() {
 
   //Initialize Ground objects, each on their respective locations
   //SCREEN 1
-  ground[0] = new Ground(320,450,400,50);
-  ground[1] = new Ground(0,480,0,0);
-  ground[2] = new Ground(320,390,70,70);
+  ground[0] = new Ground(320,height-30,800,50);
+  ground[1] = new Ground(320,height-90,70,70);
+  ground[2] = new Ground(500,height-125,70,140);
   ground[3] = new Ground(0,480,0,0);
 
   //SCREEN 2

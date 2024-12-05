@@ -19,6 +19,7 @@ class Ground {
   //Draw Ground
   void display() {
     stroke(255);
+    strokeWeight(2);
     noFill();
     rect(posX, posY, sizeX, sizeY);
   }
