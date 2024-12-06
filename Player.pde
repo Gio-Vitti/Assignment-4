@@ -16,6 +16,10 @@ class Player {
   float sizeX = 30;
   float sizeY = 50;
 
+  float leftLeg = 10;
+  float rightLeg = -10;
+  boolean legDown;
+
   //Visual effects
   float effectSize;
   float effectOpacity;
@@ -45,16 +49,43 @@ class Player {
   //Draw Player and UFO
   void display() {
     //Draw Player
+    smooth();
     fill(#0d1030);
     stroke(#ff56b9);
     strokeWeight(3);
-    rect(pos.x, pos.y - 5, sizeX, sizeY);
+    // rect(pos.x,pos.y - 5,sizeX,sizeY);
+
+    //Left Leg
+    rect(pos.x-7.5, pos.y-5 + leftLeg, 0, 20);
+    //Left Foot
+    ellipse(pos.x-10.5, pos.y + leftLeg + 10.5, 10, 5);
+    //Right Leg
+    rect(pos.x+7.5, pos.y-5 + rightLeg, 0, 20);
+    //Right Foot
+    ellipse(pos.x+10.5, pos.y + rightLeg + 10.5, 10, 5);
+
+    //Head
+    ellipse(pos.x, pos.y-17.5, 30, 30);
+
+
+    //Animate legs
+    if (leftLeg == 10) {
+      legDown = true;
+    } else if (leftLeg == -10) {
+      legDown = false;
+    } 
+
+    if (legDown == true && vel.x != 0) {
+      leftLeg = leftLeg - 1;
+      rightLeg = rightLeg + 1;
+    }
+
+    if (legDown == false && vel.x != 0) {
+      leftLeg = leftLeg + 1;
+      rightLeg = rightLeg - 1;
+    }
 
     //draws UFO on mouse cursor;
-    strokeWeight(2);
-    stroke (255);
-
-    smooth();
     strokeWeight(2);
     stroke (255);
 

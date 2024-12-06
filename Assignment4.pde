@@ -38,9 +38,9 @@ void setup() {
 
   //Initialize Ground objects, each on their respective locations
   //SCREEN 1
-  ground[0] = new Ground(320, height-30, 800, 50);
-  ground[1] = new Ground(320, height-90, 70, 70);
-  ground[2] = new Ground(500, height-125, 70, 140);
+  ground[0] = new Ground(320, height-40, 800, 76);
+  ground[1] = new Ground(320, height-115, 70, 70);
+  ground[2] = new Ground(500, height-150, 70, 140);
   ground[3] = new Ground(0, 480, 0, 0);
 
   //SCREEN 2
@@ -61,9 +61,10 @@ void draw() {
 
   if (gameActive == false) {
     //Write Text
+    textAlign(CENTER);
     fill(255);
     textSize(42.5);
-    text("Click to Start", 205, 215);
+    text("Click to Start", width/2, 215);
 
     //Draw TextBox
     stroke(255);
@@ -82,16 +83,17 @@ void draw() {
     box.physics();
     box.playerInteractions();
 
-    //Player Methods
-    player.physics();
-    player.display();
-
     //Ground methods
     for (int i = 0; i < 4; i++) {
       ground[i].display();
       ground[i].playerInteractions();
       ground[i].boxInteractions();
     }
+    
+     //Player Methods
+    player.physics();
+    player.display();
+
   }
 
   //Explosion effect when falling off stage
