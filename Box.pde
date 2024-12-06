@@ -55,13 +55,6 @@ class Box {
     }
   }
 
-  void reset() {
-    acc.y = 0;
-    vel.y = 0;
-    pos.x = initialPosX;
-    pos.y = initialPosY;
-  }
-
   //Box Physics
   //Gravity when not grabbed by the mouse
   void physics() {
@@ -86,6 +79,13 @@ class Box {
     if (boxGrabbed == true) {
       pos.x = mouseX - scroll;
       pos.y = mouseY;
+
+      if (pos.y - sizeY/2 > height || gameActive == false) {
+        acc.y = 0;
+        vel.y = 0;
+        pos.x = initialPosX;
+        pos.y = initialPosY;
+      }
     }
   }
 

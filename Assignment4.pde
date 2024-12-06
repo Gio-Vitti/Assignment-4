@@ -6,15 +6,17 @@ float explosionSize;
 float explosionSpeed = 10;
 
 int lineNumber = 16;
+int groundNumber = 3;
+int boxNumber = 2;
 
 boolean gameActive = false;
 
 //Declare objects
 Player player;
-Box box;
 
 //Declare Arrays
-Ground [] ground = new Ground[4];
+Ground [] ground = new Ground[groundNumber];
+Box [] box = new Box[boxNumber];
 GridLines [] gridLines = new GridLines [lineNumber];
 
 //Setup
@@ -32,20 +34,28 @@ void setup() {
   player = new Player(X, Y);
   player.reset();
 
-  box = new Box(X, Y, 200, 200);
-
-  box.reset();
-
-  //Initialize Ground objects, each on their respective locations
+  //Initialize Ground and Box objects, each on their respective locations
   //SCREEN 1
-  ground[0] = new Ground(320, height-40, 800, 76);
-  ground[1] = new Ground(320, height-115, 70, 70);
-  ground[2] = new Ground(500, height-150, 70, 140);
-  ground[3] = new Ground(0, 480, 0, 0);
+  ground[0] = new Ground(320, height-40, 640, 76);
+  ground[1] = new Ground(70, 200, 140, 400);
+  ground[2] = new Ground(590, 310, 100, 180);
+  box[0] = new Box(X, Y, 570, 200);
+  box[1] = new Box(X, Y, 200, 200);
 
   //SCREEN 2
 
+
+
   //SCREEN 3
+
+
+
+  //SCREEN 4
+  
+  for (int i = 0; i < boxNumber; i++) {
+  box[i].pos.x = box[i].initialPosX;
+  box[i].pos.y = box[i].initialPosY;
+}
 }
 
 void draw() {
@@ -60,40 +70,44 @@ void draw() {
   }
 
   if (gameActive == false) {
+    // Title Screen:
     //Write Text
     textAlign(CENTER);
     fill(255);
     textSize(42.5);
-    text("Click to Start", width/2, 215);
+    text("Click to Start", width/2, 195);
 
     //Draw TextBox
     stroke(255);
     noFill();
     strokeWeight(3);
-    stroke(#ff458a);
-    rect(width/2, 203, 240, 80);
+    stroke(#ff56b9);
+    rect(width/2, 183, 240, 80);
     stroke(255);
-    rect(width/2, 200, 240, 80);
+    rect(width/2, 180, 240, 80);
+
+    //Draw Alien:
   }
 
   if (gameActive == true) {
 
     //Box methods
-    box.display();
-    box.physics();
-    box.playerInteractions();
+    for (int i = 0; i < boxNumber; i++) {
+      box[i].display();
+      box[i].physics();
+      box[i].playerInteractions();
+    }
 
     //Ground methods
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < groundNumber; i++) {
       ground[i].display();
       ground[i].playerInteractions();
       ground[i].boxInteractions();
     }
-    
-     //Player Methods
+
+    //Player Methods
     player.physics();
     player.display();
-
   }
 
   //Explosion effect when falling off stage
@@ -114,11 +128,6 @@ void draw() {
       player.reset();
       explosionSize = 0;
     }
-  }
-
-  //Resets Box when falling off the stage
-  if (box.pos.y - box.sizeY/2 >= height) {
-    box.reset();
   }
 }
 
@@ -163,5 +172,7 @@ void mousePressed() {
 
 //Lets go of box when releasing mouse
 void mouseReleased() {
-  box.boxGrabbed = false;
+  for (int i = 0; i < boxNumber; i++) {
+    box[i].boxGrabbed = false;
+  }
 }

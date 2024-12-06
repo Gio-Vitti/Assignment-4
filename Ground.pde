@@ -57,16 +57,18 @@ class Ground {
 
   void boxInteractions() {
     //Box's VERTICAL collision with ground
-    if (box.pos.y + box.sizeY/2 >= posY - sizeY/2 && box.pos.y + box.sizeY/2 < posY + sizeY/2 && box.pos.x - box.sizeX/2 <= posX + sizeX/2 && box.pos.x + box.sizeX/2 >= posX - sizeX/2) {
-      box.acc.y = 0;
-      box.vel.y = 0;
-    } else {
-      box.acc.y = 0.2;
-    }
+    for (int i = 0; i < boxNumber; i++) {
+      if (box[i].pos.y + box[i].sizeY/2 >= posY - sizeY/2 && box[i].pos.y + box[i].sizeY/2 < posY + sizeY/2 && box[i].pos.x - box[i].sizeX/2 <= posX + sizeX/2 && box[i].pos.x + box[i].sizeX/2 >= posX - sizeX/2) {
+        box[i].acc.y = 0;
+        box[i].vel.y = 0;
+      } else {
+        box[i].acc.y = 0.2;
+      }
 
-    //Ensures that the box doesn't clip into the ground
-    if (box.acc.y == 0 && box.boxGrabbed == false) {
-      box.pos.y = posY - sizeY/2 - box.sizeY/2;
+      //Ensures that the box[i] doesn't clip into the ground
+      if (box[i].acc.y == 0 && box[i].boxGrabbed == false) {
+        box[i].pos.y = posY - sizeY/2 - box[i].sizeY/2;
+      }
     }
   }
 }
