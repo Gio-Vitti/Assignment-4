@@ -6,7 +6,7 @@ float explosionSize;
 float explosionSpeed = 10;
 
 int lineNumber = 16;
-int groundNumber = 3;
+int groundNumber = 6;
 int boxNumber = 2;
 
 boolean gameActive = false;
@@ -38,12 +38,13 @@ void setup() {
   //SCREEN 1
   ground[0] = new Ground(320, height-40, 640, 76);
   ground[1] = new Ground(70, 200, 140, 400);
-  ground[2] = new Ground(590, 310, 100, 180);
-  box[0] = new Box(X, Y, 570, 200);
-  box[1] = new Box(X, Y, 200, 200);
+  ground[2] = new Ground(590, 320, 100, 160);
+  box[0] = new Box(X, Y, 570, 0);
+  box[1] = new Box(X, Y, 0, 0);
 
   //SCREEN 2
-
+ ground[3] = new Ground(100, height-40, 200, 76);
+  ground[4] = new Ground(380, height-40, 200, 34);
 
 
   //SCREEN 3

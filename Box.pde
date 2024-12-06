@@ -79,13 +79,13 @@ class Box {
     if (boxGrabbed == true) {
       pos.x = mouseX - scroll;
       pos.y = mouseY;
+    }
 
-      if (pos.y - sizeY/2 > height || gameActive == false) {
+      if (pos.y - sizeY/2 > height) {
         acc.y = 0;
         vel.y = 0;
         pos.x = initialPosX;
         pos.y = initialPosY;
-      }
     }
   }
 
@@ -94,7 +94,7 @@ class Box {
   void playerInteractions() {
 
     //Player's VERTICAL collision with box
-    if (player.pos.y + player.sizeY/2 >= pos.y - sizeY/2 && player.pos.y + player.sizeY/2 < pos.y-sizeY/3 && player.pos.x - player.sizeX/2 +5 <= pos.x + sizeX/2 && player.pos.x + player.sizeX/2 -5 >= pos.x - sizeX/2) {
+    if (player.pos.y + player.sizeY/2 >= pos.y - sizeY/2 && player.pos.y + player.sizeY/2 < pos.y-sizeY/3 && player.pos.x - player.sizeX/2 +5 <= pos.x + sizeX/2 && player.pos.x + player.sizeX/2 -5 >= pos.x - sizeX/2 && boxGrabbed == false) {
       player.acc.y = 0;
       player.vel.y = 0;
       player.touchBox = true;
