@@ -6,6 +6,7 @@ class Player {
   boolean jumping;
   
   boolean touchGround;
+  boolean touchBox;
 
   //Movement Pararmeters
   float jumpHeight = 6;
@@ -43,7 +44,7 @@ class Player {
     noFill();
     stroke(#ff56b9);
     strokeWeight(3);
-    rect(pos.x, pos.y - 2, sizeX, sizeY);
+    rect(pos.x, pos.y - 5, sizeX, sizeY);
   }
 
   //Physics and Movement
