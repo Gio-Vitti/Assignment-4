@@ -20,7 +20,7 @@ class Ground {
   void display() {
     stroke(255);
     strokeWeight(2);
-    noFill();
+    fill(#0d1030);
     rect(posX, posY, sizeX, sizeY);
   }
 

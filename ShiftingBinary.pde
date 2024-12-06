@@ -2,27 +2,39 @@
 //Screen scrolling offset
 float scroll;
 
+float explosionSize;
+float explosionSpeed = 10;
+
+int lineNumber = 16;
+
+boolean gameActive = false;
 
 //Declare objects
 Player player;
 Box box;
 
-//Ground Array
+//Declare Arrays
 Ground [] ground = new Ground[4];
+GridLines [] gridLines = new GridLines [lineNumber];
 
 //Setup
 void setup() {
   size(640, 480);
   rectMode(CENTER);
 
+  //Draws lines in the background;
+  gridLines = new GridLines[lineNumber];
+  for (int i = 0; i < lineNumber; i++) {
+    gridLines[i] = new GridLines(i*40, i*40, i*40, i*40);
+  }
+
   //Initialize player and reset position
   player = new Player(X, Y);
   player.reset();
 
-  box = new Box(X, Y);
-  box.pos.x = 200;
-  box.pos.y = 200;
+  box = new Box(X, Y, 200, 200);
 
+  box.reset();
 
   //Initialize Ground objects, each on their respective locations
   //SCREEN 1
@@ -43,25 +55,68 @@ void draw() {
   scroll = width/2 - player.pos.x;
   translate(scroll, 0);
 
-  //Player methods
-  player.physics();
-  player.display();
-
-  //Box methods
-  box.display();
-  box.physics();
-  box.playerInteractions();
-
-  //Ground methods
-  for (int i = 0; i < 4; i++) {
-    ground[i].display();
-    ground[i].playerInteractions();
-    ground[i].boxInteractions();
+  for (int i = 0; i < lineNumber; i++) {
+    gridLines[i].display();
   }
 
-  //Resets when falling off the stage
-  if (player.pos.y - player.sizeY - 50 > height) {
-    player.reset();
+  if (gameActive == false) {
+    //Write Text
+    fill(255);
+    textSize(42.5);
+    text("Click to Start", 205, 215);
+
+    //Draw TextBox
+    stroke(255);
+    noFill();
+    strokeWeight(3);
+    stroke(#ff458a);
+    rect(width/2, 203, 240, 80);
+    stroke(255);
+    rect(width/2, 200, 240, 80);
+  }
+
+  if (gameActive == true) {
+
+    //Box methods
+    box.display();
+    box.physics();
+    box.playerInteractions();
+
+    //Player Methods
+    player.physics();
+    player.display();
+
+    //Ground methods
+    for (int i = 0; i < 4; i++) {
+      ground[i].display();
+      ground[i].playerInteractions();
+      ground[i].boxInteractions();
+    }
+  }
+
+  //Explosion effect when falling off stage
+  if (player.pos.y - player.sizeY > height) {
+    strokeWeight(5);
+    stroke(#ff56b9);
+    noFill();
+    rect(player.pos.x, height, explosionSize, explosionSize);
+    rect(player.pos.x, height, explosionSize-100, explosionSize-100);
+    rect(player.pos.x, height, explosionSize-200, explosionSize-200);
+
+    //Animate the explosion
+    explosionSize = explosionSize + explosionSpeed;
+
+    //Resets player position once exploson is off screen
+    if (explosionSize > 1200) {
+      gameActive = false;
+      player.reset();
+      explosionSize = 0;
+    }
+  }
+
+  //Resets Box when falling off the stage
+  if (box.pos.y - box.sizeY/2 >= height) {
+    box.reset();
   }
 }
 
@@ -94,6 +149,13 @@ void keyReleased() {
 
   if (key=='w') {
     player.jumping = false;
+  }
+}
+
+void mousePressed() {
+  if (gameActive == false) {
+    gameActive = true;
+    player.reset();
   }
 }
 
