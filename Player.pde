@@ -55,25 +55,33 @@ class Player {
     strokeWeight(3);
     // rect(pos.x,pos.y - 5,sizeX,sizeY);
 
-    //Left Leg
+    //Legs
+    //Draws legs when not moving
+    if (vel.x == 0) {
+      //Left Leg
+      rect(pos.x-7.5, pos.y+2, 0, 20);
+      //Left Foot
+      ellipse(pos.x-10.5, pos.y + 16.5, 10, 5);
+      //Right Leg
+      rect(pos.x+7.5, pos.y+2, 0, 20);
+      //Right Foot
+      ellipse(pos.x+10.5, pos.y + 16.5, 10, 5);
+    } else { //Draws legs when moving (animated)
+      //Left Leg
     rect(pos.x-7.5, pos.y-5 + leftLeg, 0, 20);
     //Left Foot
     ellipse(pos.x-10.5, pos.y + leftLeg + 10.5, 10, 5);
     //Right Leg
     rect(pos.x+7.5, pos.y-5 + rightLeg, 0, 20);
     //Right Foot
-    ellipse(pos.x+10.5, pos.y + rightLeg + 10.5, 10, 5);
+    ellipse(pos.x+10.5, pos.y + rightLeg + 10.5, 10, 5); 
+    }
 
-    //Head
-    ellipse(pos.x, pos.y-17.5, 30, 30);
-
-
-    //Animate legs
     if (leftLeg == 10) {
       legDown = true;
     } else if (leftLeg == -10) {
       legDown = false;
-    } 
+    }
 
     if (legDown == true && vel.x != 0) {
       leftLeg = leftLeg - 1;
@@ -84,6 +92,9 @@ class Player {
       leftLeg = leftLeg + 1;
       rightLeg = rightLeg - 1;
     }
+    
+      //Head
+    ellipse(pos.x, pos.y-17.5, 30, 30);
 
     //draws UFO on mouse cursor;
     strokeWeight(2);
