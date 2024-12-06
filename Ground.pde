@@ -29,7 +29,7 @@ class Ground {
 
 
     //Player's VERTICAL collision with ground
-    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.y + player.sizeY/2 < posY-sizeY/3 && player.pos.x - player.sizeX/2 +5 <= posX + sizeX/2 && player.pos.x + player.sizeX/2 -5 >= posX - sizeX/2) {
+    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.y + player.sizeY/2 < posY-sizeY/3 + 10 && player.pos.x - player.sizeX/2 +5 <= posX + sizeX/2 && player.pos.x + player.sizeX/2 -5 >= posX - sizeX/2) {
       player.acc.y = 0;
       player.vel.y = 0;
       player.touchGround = true;
@@ -47,6 +47,11 @@ class Ground {
     //Left edge collision
     if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.x - player.sizeX/2 >= posX + sizeX/2 - 5 && player.pos.x - player.sizeX/2 <= posX + sizeX/2 && player.moveLeft == true) {
       player.vel.x = 0;
+    }
+
+    //Player Jumping (does not work if outside of Ground class)
+    if (player.jumping == true && player.touchGround == true) {
+      player.vel.y = player.vel.y - player.jumpHeight;
     }
   }
 

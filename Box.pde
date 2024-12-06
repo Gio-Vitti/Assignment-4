@@ -27,6 +27,7 @@ class Box {
     strokeWeight(3);
     noFill();
     rect(pos.x, pos.y - 3, sizeX, sizeY);
+    
   }
 
   //Box Gravity when not grabbed by the mouse
@@ -36,12 +37,13 @@ class Box {
       vel.y = vel.y + acc.y;
     }
 
-    if (mousePressed == true && mouseX > pos.x - sizeX/2 && mouseX < pos.x + sizeX/2) {
+//Grabbing box with the mouse
+    if (mousePressed == true && mouseX - scroll > pos.x - sizeX/2 && mouseX - scroll < pos.x + sizeX/2 && mouseY < pos.y + sizeY/2 && mouseY > pos.y - sizeY/2) {
       boxGrabbed = true;
     }
 
     if (boxGrabbed == true) {
-      pos.x = mouseX;
+      pos.x = mouseX - scroll;
       pos.y = mouseY;
     }
   }
@@ -63,5 +65,12 @@ class Box {
     if (player.touchBox == true && player.jumping == false) {
       player.pos.y = pos.y - sizeY/2 - player.sizeY/2;
     }
+    
+    //Player jumping on top of box (does not work outside of Box class)
+    if (player.jumping == true && player.touchBox == true) {
+        player.vel.y = player.vel.y - player.jumpHeight;
+    }
+    
+   
   }
 }

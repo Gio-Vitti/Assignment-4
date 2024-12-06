@@ -9,7 +9,7 @@ class Player {
   boolean touchBox;
 
   //Movement Pararmeters
-  float jumpHeight = 6;
+  float jumpHeight = 7;
   float speed = 5;
 
   //Size

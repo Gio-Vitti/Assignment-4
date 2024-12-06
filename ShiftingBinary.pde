@@ -1,4 +1,7 @@
 //Variables
+//Screen scrolling offset
+float scroll;
+
 
 //Declare objects
 Player player;
@@ -37,24 +40,23 @@ void draw() {
   background(#0d1030);
 
   //Screen scroll
-  translate(width/2 - player.pos.x, 0);
+  scroll = width/2 - player.pos.x;
+  translate(scroll, 0);
 
+  //Player methods
   player.physics();
   player.display();
 
+  //Box methods
   box.display();
   box.physics();
   box.playerInteractions();
 
+  //Ground methods
   for (int i = 0; i < 4; i++) {
     ground[i].display();
     ground[i].playerInteractions();
     ground[i].boxInteractions();
-
-    //Player Jumping (does not work if outside of Ground class)
-    if (player.jumping == true && player.touchGround == true || player.jumping == true && player.touchBox == true) {
-      player.vel.y = player.vel.y - player.jumpHeight;
-    }
   }
 
   //Resets when falling off the stage
