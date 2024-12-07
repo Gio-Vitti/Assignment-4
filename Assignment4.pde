@@ -2,17 +2,20 @@
 //Screen scrolling offset
 float scroll;
 
+//Explosion Effect
 float explosionSize;
 float explosionSpeed = 10;
 
+//Array Sizes
 int lineNumber = 16;
-int groundNumber = 9;
-int boxNumber = 5;
+int groundNumber = 12;
+int boxNumber = 12;
 int spikeNumber = 5;
 
-//Game Over
+//Game State
 boolean gameActive = false;
 boolean touchingSpike;
+boolean gameWon;
 
 //Declare objects
 Player player;
@@ -60,16 +63,28 @@ void setup() {
 
   spike[0] = new Spike(520+640, 380);
 
-  //SCREEN 3 (Add 1280 to all X proportions)
+  //SCREEN 3 (Add 1280 to all X positions)
   ground[7] = new Ground(80+1280, height-40, 160, 76);
   ground[8] = new Ground(420+1280, 140, 100, 40);
 
- spike[1] = new Spike(1280+220, 460);
-spike[2] = new Spike(1280+340, 460);
-spike[3] = new Spike(1280+460, 460);
-spike[4] = new Spike(1280+580, 460);
+  spike[1] = new Spike(1280+220, 460);
+  spike[2] = new Spike(1280+340, 460);
+  spike[3] = new Spike(1280+460, 460);
+  spike[4] = new Spike(1280+580, 460);
 
-  //SCREEN 4
+  box[5] = new Box(X, Y, 1280+390, 0);
+  box[6] = new Box(X, Y, 1280+450, 0);
+
+  //SCREEN 4 - FINAL (Add 1920 to all X positions)
+  ground[9] = new Ground(80+1920, height-40, 160, 76);
+  ground[10] = new Ground(470+1920, height-40, 340, 76);
+  ground[11] = new Ground(470+1920, 80, 340, 180);
+
+  box[7] = new Box(X, Y, 1920+340, 380);
+  box[8] = new Box(X, Y, 1920+340, 335);
+  box[9] = new Box(X, Y, 1920+340, 290);
+  box[10] = new Box(X, Y, 1920+340, 245);
+  box[11] = new Box(X, Y, 1920+340, 200);
 
   for (int i = 0; i < boxNumber; i++) {
     box[i].pos.x = box[i].initialPosX;
@@ -88,13 +103,17 @@ void draw() {
     gridLines[i].display();
   }
 
+
   if (gameActive == false) {
     // Title Screen:
-    //Write Text
+    //Write Text (stage not finished)
     textAlign(CENTER);
     fill(255);
     textSize(42.5);
     text("Click to Start", width/2, 195);
+
+    //Write Text (stage finished)
+    text("You did it!", width/2+1920, 195);
 
     //Draw TextBox
     stroke(255);
@@ -109,6 +128,14 @@ void draw() {
   }
 
   if (gameActive == true) {
+
+    //GOAL:
+    //Draw Goal
+    stroke(#57ebff);
+    strokeWeight(3);
+    triangle(1920+400, 400, 1920+500, 280, 1920+600, 400);
+    triangle(1920+440, 400, 1920+500, 320, 1920+560, 400);
+    triangle(1920+470, 400, 1920+500, 360, 1920+530, 400);
 
     //Box methods
     for (int i = 0; i < boxNumber; i++) {
@@ -158,6 +185,12 @@ void draw() {
       explosionSize = 0;
       touchingSpike = false;
     }
+  }
+
+  //Reach goal and finish stage
+  if (player.pos.x >= 1920+500) {
+    gameWon = true;
+    gameActive = false;
   }
 }
 

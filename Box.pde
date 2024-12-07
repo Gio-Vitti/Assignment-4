@@ -27,7 +27,7 @@ class Box {
     pos = new PVector (x, y);
     vel = new PVector (x, y);
     acc = new PVector (x, y);
-    initialPosX = tempPosX-25;
+    initialPosX = tempPosX;
     initialPosY = tempPosY-25;
   }
 
