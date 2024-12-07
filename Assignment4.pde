@@ -6,10 +6,13 @@ float explosionSize;
 float explosionSpeed = 10;
 
 int lineNumber = 16;
-int groundNumber = 6;
-int boxNumber = 2;
+int groundNumber = 9;
+int boxNumber = 5;
+int spikeNumber = 5;
 
+//Game Over
 boolean gameActive = false;
+boolean touchingSpike;
 
 //Declare objects
 Player player;
@@ -18,6 +21,7 @@ Player player;
 Ground [] ground = new Ground[groundNumber];
 Box [] box = new Box[boxNumber];
 GridLines [] gridLines = new GridLines [lineNumber];
+Spike [] spike = new Spike [spikeNumber];
 
 //Setup
 void setup() {
@@ -39,24 +43,38 @@ void setup() {
   ground[0] = new Ground(320, height-40, 640, 76);
   ground[1] = new Ground(70, 200, 140, 400);
   ground[2] = new Ground(590, 320, 100, 160);
+
   box[0] = new Box(X, Y, 570, 0);
-  box[1] = new Box(X, Y, 0, 0);
-
-  //SCREEN 2
- ground[3] = new Ground(100, height-40, 200, 76);
-  ground[4] = new Ground(380, height-40, 200, 34);
 
 
-  //SCREEN 3
+  //SCREEN 2 (Add 640 to all X positions)
+  ground[3] = new Ground(740, height-40, 200, 76);
+  ground[4] = new Ground(640+380, 320, 160, 320);
+  ground[5] = new Ground(640+550, height-40, 180, 76);
+  ground[6] = new Ground(640+630, 110, 100, 220);
 
+  box[1] = new Box(X, Y, 60+640, 0);
+  box[2] = new Box(X, Y, 120+640, 0);
+  box[3] = new Box(X, Y, 180+640, 0);
+  box[4] = new Box(X, Y, 520+640, 0);
 
+  spike[0] = new Spike(520+640, 380);
+
+  //SCREEN 3 (Add 1280 to all X proportions)
+  ground[7] = new Ground(80+1280, height-40, 160, 76);
+  ground[8] = new Ground(420+1280, 140, 100, 40);
+
+ spike[1] = new Spike(1280+220, 460);
+spike[2] = new Spike(1280+340, 460);
+spike[3] = new Spike(1280+460, 460);
+spike[4] = new Spike(1280+580, 460);
 
   //SCREEN 4
-  
+
   for (int i = 0; i < boxNumber; i++) {
-  box[i].pos.x = box[i].initialPosX;
-  box[i].pos.y = box[i].initialPosY;
-}
+    box[i].pos.x = box[i].initialPosX;
+    box[i].pos.y = box[i].initialPosY;
+  }
 }
 
 void draw() {
@@ -106,19 +124,29 @@ void draw() {
       ground[i].boxInteractions();
     }
 
-    //Player Methods
-    player.physics();
-    player.display();
+    //Box methods
+    for (int i = 0; i < spikeNumber; i++) {
+      spike[i].display();
+      spike[i].playerInteractions();
+      spike[i].boxInteractions();
+    }
+    if (touchingSpike == false) {
+      //Player Methods
+      player.physics();
+      player.display();
+    }
   }
 
-  //Explosion effect when falling off stage
-  if (player.pos.y - player.sizeY > height) {
+  //Explosion effect when falling off stage, taken from my Assignment 3
+  if (player.pos.y - player.sizeY > height || touchingSpike == true) {
+    player.vel.y = 0;
+    player.acc.y = 0;
     strokeWeight(5);
     stroke(#ff56b9);
     noFill();
-    rect(player.pos.x, height, explosionSize, explosionSize);
-    rect(player.pos.x, height, explosionSize-100, explosionSize-100);
-    rect(player.pos.x, height, explosionSize-200, explosionSize-200);
+    rect(player.pos.x, player.pos.y-25, explosionSize, explosionSize);
+    rect(player.pos.x, player.pos.y-25, explosionSize-100, explosionSize-100);
+    rect(player.pos.x, player.pos.y-25, explosionSize-200, explosionSize-200);
 
     //Animate the explosion
     explosionSize = explosionSize + explosionSpeed;
@@ -128,6 +156,7 @@ void draw() {
       gameActive = false;
       player.reset();
       explosionSize = 0;
+      touchingSpike = false;
     }
   }
 }

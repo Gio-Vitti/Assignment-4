@@ -40,12 +40,12 @@ class Ground {
 
     //Player's HORIZONTAL collision with ground
     //Right edge collision
-    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.x + player.sizeX/2 <= posX - sizeX/2 + 5 && player.pos.x + player.sizeX/2 >= posX - sizeX/2 && player.moveRight == true) {
+    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.y - player.sizeY/2 < posY + sizeY/2 && player.pos.x + player.sizeX/2 <= posX - sizeX/2 + 5 && player.pos.x + player.sizeX/2 >= posX - sizeX/2 && player.moveRight == true) {
       player.vel.x = 0;
     }
 
     //Left edge collision
-    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.x - player.sizeX/2 >= posX + sizeX/2 - 5 && player.pos.x - player.sizeX/2 <= posX + sizeX/2 && player.moveLeft == true) {
+    if (player.pos.y + player.sizeY/2 >= posY - sizeY/2 && player.pos.y - player.sizeY/2 < posY + sizeY/2 && player.pos.x - player.sizeX/2 >= posX + sizeX/2 - 5 && player.pos.x - player.sizeX/2 <= posX + sizeX/2 && player.moveLeft == true) {
       player.vel.x = 0;
     }
 

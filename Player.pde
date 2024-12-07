@@ -41,7 +41,7 @@ class Player {
   //Reset Position and Physics
   void reset() {
     pos.x = width/2;
-    pos.y = height/2;
+    pos.y = 0;
     acc.y = 0;
     vel.y = 0;
   }

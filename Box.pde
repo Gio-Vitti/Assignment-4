@@ -1,8 +1,8 @@
 class Box {
 
   //Variables
-  float sizeX = 40;
-  float sizeY = 40;
+  float sizeX = 45;
+  float sizeY = 45;
 
   //Position
   float initialPosX;
@@ -81,11 +81,11 @@ class Box {
       pos.y = mouseY;
     }
 
-      if (pos.y - sizeY/2 > height) {
-        acc.y = 0;
-        vel.y = 0;
-        pos.x = initialPosX;
-        pos.y = initialPosY;
+    if (pos.y - sizeY/2 > height) {
+      acc.y = 0;
+      vel.y = 0;
+      pos.x = initialPosX;
+      pos.y = initialPosY;
     }
   }
 
@@ -122,6 +122,16 @@ class Box {
     //Player jumping on top of box (does not work outside of Box class)
     if (player.jumping == true && player.touchBox == true) {
       player.vel.y = player.vel.y - player.jumpHeight;
+    }
+
+   //Box's VERTICAL collision with another box
+    for (int i = 0; i < boxNumber; i++) {
+      if (box[i].pos.y + box[i].sizeY/2 >= pos.y - sizeY/2 && box[i].pos.y + box[i].sizeY/2 < pos.y + sizeY/2 && box[i].pos.x - box[i].sizeX/2 <= pos.x + sizeX/2 && box[i].pos.x + box[i].sizeX/2 >= pos.x - sizeX/2) {
+        box[i].acc.y = 0;
+        box[i].vel.y = 0;
+      } else {
+        box[i].acc.y = 0.2;
+      }
     }
   }
 }
