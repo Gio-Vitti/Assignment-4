@@ -30,6 +30,9 @@ Spike [] spike = new Spike [spikeNumber];
 void setup() {
   size(640, 480);
   rectMode(CENTER);
+  
+  //Print instructions
+  println("WASD to move, use the mouse to pick up boxes");
 
   //Draws lines in the background;
   gridLines = new GridLines[lineNumber];
@@ -107,24 +110,26 @@ void draw() {
   if (gameActive == false) {
     // Title Screen:
     //Write Text (stage not finished)
-    textAlign(CENTER);
-    fill(255);
-    textSize(42.5);
-    text("Click to Start", width/2, 195);
-
-    //Write Text (stage finished)
-    text("You did it!", width/2+1920, 195);
-
+    if (gameWon == false) {
+      textAlign(CENTER);
+      fill(255);
+      textSize(42.5);
+      text("Click to Start", width/2, height/2+15);
+    } else {
+      //Write Text (stage finished)
+      fill(255);
+      text("You did it!", width/2-scroll, height/2+15);
+    }
+    
     //Draw TextBox
     stroke(255);
     noFill();
     strokeWeight(3);
     stroke(#ff56b9);
-    rect(width/2, 183, 240, 80);
+    rect(width/2, height/2-3, 240, 80);
     stroke(255);
-    rect(width/2, 180, 240, 80);
+    rect(width/2, height/2, 240, 80);
 
-    //Draw Alien:
   }
 
   if (gameActive == true) {
@@ -190,6 +195,7 @@ void draw() {
   //Reach goal and finish stage
   if (player.pos.x >= 1920+500) {
     gameWon = true;
+    player.reset();
     gameActive = false;
   }
 }
@@ -226,9 +232,11 @@ void keyReleased() {
   }
 }
 
+//Resets game when clicking mouse on title screen
 void mousePressed() {
   if (gameActive == false) {
     gameActive = true;
+    gameWon = false;
     player.reset();
   }
 }

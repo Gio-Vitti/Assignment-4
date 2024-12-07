@@ -23,6 +23,7 @@ class Box {
   //Acceleration
   PVector acc;
 
+//Constructor
   Box (float x, float y, float tempPosX, float tempPosY) {
     pos = new PVector (x, y);
     vel = new PVector (x, y);
@@ -81,7 +82,8 @@ class Box {
       pos.y = mouseY;
     }
 
-    if (pos.y - sizeY/2 > height || player.pos.y - player.sizeY > height || touchingSpike == true) {
+//Resets Box position if it falls off the stage, if the player dies, or if the player wins the game
+    if (pos.y - sizeY/2 > height || player.pos.y - player.sizeY > height || touchingSpike == true || player.pos.x >= 1920+500) {
       acc.y = 0;
       vel.y = 0;
       pos.x = initialPosX;

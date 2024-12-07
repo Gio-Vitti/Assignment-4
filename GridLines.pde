@@ -5,6 +5,7 @@ class GridLines {
   float xPoint2;
   float yPoint2;
 
+//Constructor
   GridLines(float tempXPoint1, float tempYPoint1, float tempXPoint2, float tempYPoint2) {
     xPoint1 = tempXPoint1;
     yPoint1 = tempYPoint1;
@@ -12,6 +13,7 @@ class GridLines {
     yPoint2 = tempYPoint2;
   }
 
+//Draw background lines
   void display() {
     stroke(#393c5c);
     strokeWeight(2);

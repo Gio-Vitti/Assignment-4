@@ -32,6 +32,7 @@ class Player {
   //Acceleration
   PVector acc;
 
+//Constructor
   Player (float x, float y) {
     pos = new PVector (x, y);
     vel = new PVector (x, y);
