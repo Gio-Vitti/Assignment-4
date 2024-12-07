@@ -8,7 +8,7 @@ float explosionSpeed = 10;
 
 //Array Sizes
 int lineNumber = 16;
-int groundNumber = 12;
+int groundNumber = 11;
 int boxNumber = 12;
 int spikeNumber = 5;
 
@@ -56,8 +56,7 @@ void setup() {
   //SCREEN 2 (Add 640 to all X positions)
   ground[3] = new Ground(740, height-40, 200, 76);
   ground[4] = new Ground(640+380, 320, 160, 320);
-  ground[5] = new Ground(640+550, height-40, 180, 76);
-  ground[6] = new Ground(640+630, 110, 100, 220);
+  ground[5] = new Ground(640+630, 110, 100, 220);
 
   box[1] = new Box(X, Y, 60+640, 0);
   box[2] = new Box(X, Y, 120+640, 0);
@@ -67,8 +66,8 @@ void setup() {
   spike[0] = new Spike(520+640, 380);
 
   //SCREEN 3 (Add 1280 to all X positions)
-  ground[7] = new Ground(80+1280, height-40, 160, 76);
-  ground[8] = new Ground(420+1280, 140, 100, 40);
+  ground[6] = new Ground(1280-10, height-40, 340, 76);
+  ground[7] = new Ground(420+1280, 140, 100, 40);
 
   spike[1] = new Spike(1280+220, 460);
   spike[2] = new Spike(1280+340, 460);
@@ -79,9 +78,9 @@ void setup() {
   box[6] = new Box(X, Y, 1280+450, 0);
 
   //SCREEN 4 - FINAL (Add 1920 to all X positions)
-  ground[9] = new Ground(80+1920, height-40, 160, 76);
-  ground[10] = new Ground(470+1920, height-40, 340, 76);
-  ground[11] = new Ground(470+1920, 80, 340, 180);
+  ground[8] = new Ground(80+1920, height-40, 160, 76);
+  ground[9] = new Ground(470+1920, height-40, 340, 76);
+  ground[10] = new Ground(470+1920, 80, 340, 180);
 
   box[7] = new Box(X, Y, 1920+340, 380);
   box[8] = new Box(X, Y, 1920+340, 335);
