@@ -29,8 +29,6 @@ class Spike {
     //Game over when player touches spikes
     if (player.pos.y + player.sizeY/2 > posY - sizeY/2 && player.pos.x + player.sizeX/2 > posX - sizeX/2 && player.pos.x - player.sizeX/2 < posX + sizeX/2) {
       touchingSpike = true;
-    } else {
-      touchingSpike = false;
     }
   }
 

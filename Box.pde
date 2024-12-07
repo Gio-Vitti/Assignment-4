@@ -27,8 +27,8 @@ class Box {
     pos = new PVector (x, y);
     vel = new PVector (x, y);
     acc = new PVector (x, y);
-    initialPosX = tempPosX;
-    initialPosY = tempPosY;
+    initialPosX = tempPosX-25;
+    initialPosY = tempPosY-25;
   }
 
 
@@ -81,7 +81,7 @@ class Box {
       pos.y = mouseY;
     }
 
-    if (pos.y - sizeY/2 > height) {
+    if (pos.y - sizeY/2 > height || player.pos.y - player.sizeY > height || touchingSpike == true) {
       acc.y = 0;
       vel.y = 0;
       pos.x = initialPosX;

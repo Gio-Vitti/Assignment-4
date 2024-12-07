@@ -124,7 +124,7 @@ void draw() {
       ground[i].boxInteractions();
     }
 
-    //Box methods
+    //Spike methods
     for (int i = 0; i < spikeNumber; i++) {
       spike[i].display();
       spike[i].playerInteractions();
