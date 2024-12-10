@@ -32,7 +32,7 @@ class Player {
   //Acceleration
   PVector acc;
 
-//Constructor
+  //Constructor
   Player (float x, float y) {
     pos = new PVector (x, y);
     vel = new PVector (x, y);
@@ -96,36 +96,36 @@ class Player {
       leftLeg = leftLeg + 1;
       rightLeg = rightLeg - 1;
     }
-    
+
     //Antenna
     stroke(255);
     strokeWeight(2);
     rect(pos.x, pos.y-35, 0, 10);
-    ellipse(pos.x,pos.y-44,7.5,7.5);
-    
+    ellipse(pos.x, pos.y-44, 7.5, 7.5);
+
     //Ears
     //Left Ear
     stroke(#ff56b9);
     strokeWeight(3);
-    rect(pos.x-15, pos.y-30, 10,10);
+    rect(pos.x-15, pos.y-30, 10, 10);
     //Right Ear
-    rect(pos.x+15, pos.y-30, 10,10);
+    rect(pos.x+15, pos.y-30, 10, 10);
 
     //Head
     ellipse(pos.x, pos.y-17.5, 30, 30);
-    
+
     //Mouth
     stroke(255);
     strokeWeight(1.5);
-    ellipse(pos.x-2,pos.y-10,5,5);
-    ellipse(pos.x+2,pos.y-10,5,5);
+    ellipse(pos.x-2, pos.y-10, 5, 5);
+    ellipse(pos.x+2, pos.y-10, 5, 5);
     noStroke();
-    rect(pos.x,pos.y-10.5,5,2);
-    
+    rect(pos.x, pos.y-10.5, 5, 2);
+
     //Nose
     fill(255);
-    ellipse(pos.x,pos.y-11.5,5,2.5);
-    
+    ellipse(pos.x, pos.y-11.5, 5, 2.5);
+
     //Eyes
     stroke(255);
     fill(#0d1030);
@@ -139,16 +139,16 @@ class Player {
 
     //Animate Eyes
     //Standing Still
-     //Left pupil
-     if(vel.x == 0){
+    //Left pupil
+    if (vel.x == 0) {
       fill(255);
       ellipse(pos.x-7.5, pos.y-17.5, 3, 3);
       //Right Pupil
       ellipse(pos.x+7.5, pos.y-17.5, 3, 3);
       //Middle Pupil
       ellipse(pos.x, pos.y-27, 3, 3);
-     }
-      
+    }
+
     //Looking Right
     if (moveRight == true) {
       //Left pupil
@@ -187,7 +187,8 @@ class Player {
     ellipse(mouseX - scroll +10, mouseY, 4, 4);
     ellipse(mouseX - scroll-10, mouseY, 4, 4);
 
-    //Visual efffect for grabbing
+    //Visual efffect for jumping
+
     if (vel.y < -1.2 && effectSize < 220) {
       stroke(#ff56b9, effectOpacity);
       strokeWeight(8);

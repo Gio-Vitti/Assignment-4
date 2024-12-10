@@ -30,7 +30,7 @@ Spike [] spike = new Spike [spikeNumber];
 void setup() {
   size(640, 480);
   rectMode(CENTER);
-  
+
   //Print instructions
   println("WASD to move, use the mouse to pick up boxes");
 
@@ -119,7 +119,7 @@ void draw() {
       fill(255);
       text("You did it!", width/2-scroll, height/2+15);
     }
-    
+
     //Draw TextBox
     stroke(255);
     noFill();
@@ -128,7 +128,6 @@ void draw() {
     rect(width/2, height/2-3, 240, 80);
     stroke(255);
     rect(width/2, height/2, 240, 80);
-
   }
 
   if (gameActive == true) {
@@ -148,6 +147,13 @@ void draw() {
       box[i].playerInteractions();
     }
 
+    //Spike methods
+    for (int i = 0; i < spikeNumber; i++) {
+      spike[i].display();
+      spike[i].playerInteractions();
+      spike[i].boxInteractions();
+    }
+
     //Ground methods
     for (int i = 0; i < groundNumber; i++) {
       ground[i].display();
@@ -155,12 +161,7 @@ void draw() {
       ground[i].boxInteractions();
     }
 
-    //Spike methods
-    for (int i = 0; i < spikeNumber; i++) {
-      spike[i].display();
-      spike[i].playerInteractions();
-      spike[i].boxInteractions();
-    }
+
     if (touchingSpike == false) {
       //Player Methods
       player.physics();
