@@ -193,7 +193,7 @@ class Player {
       stroke(#ff56b9, effectOpacity);
       strokeWeight(8);
       noFill();
-      rect(pos.x, pos.y + sizeY/2, effectSize, 0);
+      rect(pos.x, pos.y + sizeY/2 + 6.5 + effectSize, effectSize, 0);
 
       effectSize = effectSize + 5;
       effectOpacity = effectOpacity - 10;
